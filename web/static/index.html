@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocean Marketing - 企业级 Go 后端框架</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .card a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .card a:hover {
+            text-decoration: underline;
+        }
+        
+        .features {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .features h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .feature {
+            padding: 1rem;
+            border-left: 4px solid #667eea;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .feature h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature span {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+        }
+        
+        .status-healthy {
+            background: #28a745;
+        }
+        
+        .status-error {
+            background: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌊 Ocean Marketing</h1>
+            <p>基于 Gin 框架的企业级 Go 后端开发框架</p>
+        </div>
+        
+        <div class="cards">
+            <div class="card">
+                <h3>📚 API 文档</h3>
+                <p>查看完整的 RESTful API 接口文档，支持在线测试。</p>
+                <a href="/swagger/index.html" target="_blank">访问 Swagger 文档 →</a>
+            </div>
+            
+            <div class="card">
+                <h3>📊 系统监控</h3>
+                <p>实时监控系统性能指标和业务数据。</p>
+                <a href="/metrics" target="_blank">查看 Prometheus 指标 →</a>
+            </div>
+            
+            <div class="card">
+                <h3>🔧 性能分析</h3>
+                <p>使用 pprof 工具进行性能分析和调优。</p>
+                <a href="/debug/pprof/" target="_blank">访问 pprof 分析 →</a>
+            </div>
+            
+            <div class="card">
+                <h3>💚 健康检查</h3>
+                <p>检查服务及其依赖组件的健康状态。</p>
+                <a href="/health" target="_blank">查看健康状态 →</a>
+            </div>
+        </div>
+        
+        <div class="features">
+            <h2>🚀 核心特性</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <h4>🔐 JWT 认证</h4>
+                    <span>完整的用户认证授权体系</span>
+                </div>
+                <div class="feature">
+                    <h4>🚦 限流保护</h4>
+                    <span>基于 IP 的接口访问限流</span>
+                </div>
+                <div class="feature">
+                    <h4>📝 结构化日志</h4>
+                    <span>Zap 高性能日志记录</span>
+                </div>
+                <div class="feature">
+                    <h4>🗄️ 数据库 ORM</h4>
+                    <span>Gorm 支持多种数据库</span>
+                </div>
+                <div class="feature">
+                    <h4>🔄 缓存支持</h4>
+                    <span>Redis 缓存操作封装</span>
+                </div>
+                <div class="feature">
+                    <h4>📧 邮件发送</h4>
+                    <span>SMTP 邮件发送功能</span>
+                </div>
+                <div class="feature">
+                    <h4>🐰 消息队列</h4>
+                    <span>RabbitMQ 消息处理</span>
+                </div>
+                <div class="feature">
+                    <h4>🔍 链路追踪</h4>
+                    <span>Jaeger 分布式追踪</span>
+                </div>
+                <div class="feature">
+                    <h4>📊 监控告警</h4>
+                    <span>Prometheus + 飞书通知</span>
+                </div>
+                <div class="feature">
+                    <h4>🐳 容器化</h4>
+                    <span>Docker + Compose 部署</span>
+                </div>
+                <div class="feature">
+                    <h4>🔧 类型转换</h4>
+                    <span>安全的类型转换工具</span>
+                </div>
+                <div class="feature">
+                    <h4>⚡ 高性能</h4>
+                    <span>生产级性能优化</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="status" id="status">
+        <div class="status-indicator">
+            <div class="status-dot status-healthy" id="statusDot"></div>
+            <span id="statusText">检查中...</span>
+        </div>
+        <div style="font-size: 0.8rem; color: #666;">
+            <span id="statusTime"></span>
+        </div>
+    </div>
+    
+    <script>
+        // 检查服务状态
+        async function checkHealth() {
+            try {
+                const response = await fetch('/health');
+                const data = await response.json();
+                const statusDot = document.getElementById('statusDot');
+                const statusText = document.getElementById('statusText');
+                const statusTime = document.getElementById('statusTime');
+                
+                if (data.status === 'healthy') {
+                    statusDot.className = 'status-dot status-healthy';
+                    statusText.textContent = '服务正常';
+                } else {
+                    statusDot.className = 'status-dot status-error';
+                    statusText.textContent = '服务异常';
+                }
+                
+                statusTime.textContent = new Date().toLocaleTimeString();
+            } catch (error) {
+                const statusDot = document.getElementById('statusDot');
+                const statusText = document.getElementById('statusText');
+                statusDot.className = 'status-dot status-error';
+                statusText.textContent = '连接失败';
+            }
+        }
+        
+        // 页面加载时检查状态
+        checkHealth();
+        
+        // 每30秒检查一次状态
+        setInterval(checkHealth, 30000);
+    </script>
+</body>
+</html> 

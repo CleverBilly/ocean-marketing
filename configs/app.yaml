@@ -1,0 +1,67 @@
+app:
+  name: ocean-marketing
+  port: :8080
+  mode: debug  # debug, release, test
+
+database:
+  driver: mysql
+  # 阿里云RDS MySQL配置
+  host: rm-xxxxxxxxxxxxxxx.mysql.rds.aliyuncs.com  # 阿里云RDS内网地址
+  port: 3306
+  database: ocean_marketing
+  username: ocean_marketing  # 数据库用户名
+  password: "YourStrongPassword123!"  # 数据库密码，请修改为实际密码
+  charset: utf8mb4
+  max_idle_conns: 10
+  max_open_conns: 100
+  conn_max_lifetime: 3600
+  # 阿里云RDS推荐配置
+  ssl_mode: preferred  # SSL连接模式
+  timeout: 10  # 连接超时时间（秒）
+  read_timeout: 30  # 读取超时时间（秒）
+  write_timeout: 30  # 写入超时时间（秒）
+  loc: Asia/Shanghai  # 时区设置
+
+redis:
+  host: localhost
+  port: 6379
+  password: ""
+  db: 0
+
+log:
+  level: info
+  format: json
+  output_path: ./logs/app.log
+  max_size: 100
+  max_age: 30
+  max_backups: 10
+  compress: true
+
+jwt:
+  secret: ocean-marketing-secret-key-change-in-production
+  expire_time: 86400  # 24小时
+  issuer: ocean-marketing
+
+email:
+  host: smtp.gmail.com
+  port: 587
+  username: your-email@gmail.com
+  password: your-app-password
+  from: your-email@gmail.com
+
+tracer:
+  service_name: ocean-marketing
+  agent_host: localhost
+  agent_port: 6831
+  sample_rate: 1.0
+
+feishu:
+  webhook_url: "https://open.feishu.cn/open-apis/bot/v2/hook/your-webhook-url"
+
+mq:
+  driver: rabbitmq
+  host: localhost
+  port: 5672
+  username: guest
+  password: guest
+  vhost: / 
