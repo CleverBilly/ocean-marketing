@@ -92,6 +92,7 @@ tmp/
 temp/
 
 # Application specific
+configs/app.yaml
 configs/app.local.yaml
 configs/*.local.*
 

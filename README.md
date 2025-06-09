@@ -90,11 +90,12 @@ go mod download
 
 ### 3. 配置文件
 
-复制并修改配置文件：
+复制示例配置文件并修改：
 
 ```bash
 cp configs/app.yaml.example configs/app.yaml
-# 编辑配置文件，设置数据库、Redis等连接信息
+# 编辑 configs/app.yaml，设置数据库、Redis等连接信息
+# 注意：app.yaml 包含敏感信息，已在 .gitignore 中忽略
 ```
 
 ### 4. 启动服务
