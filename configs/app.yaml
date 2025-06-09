@@ -1,19 +1,19 @@
 app:
   name: ocean-marketing
   port: :8080
-  mode: debug  # debug, release, test
+  mode: release  # 生产模式
 
 database:
   driver: mysql
-  # 阿里云RDS MySQL配置
+  # 阿里云RDS MySQL配置 - 请替换为实际的配置
   host: rm-xxxxxxxxxxxxxxx.mysql.rds.aliyuncs.com  # 阿里云RDS内网地址
   port: 3306
   database: ocean_marketing
   username: ocean_marketing  # 数据库用户名
-  password: "YourStrongPassword123!"  # 数据库密码，请修改为实际密码
+  password: "YourStrongPassword123!"  # 数据库密码，请使用强密码
   charset: utf8mb4
-  max_idle_conns: 10
-  max_open_conns: 100
+  max_idle_conns: 20
+  max_open_conns: 200
   conn_max_lifetime: 3600
   # 阿里云RDS推荐配置
   ssl_mode: preferred  # SSL连接模式
@@ -23,13 +23,16 @@ database:
   loc: Asia/Shanghai  # 时区设置
 
 redis:
-  host: localhost
+  # 阿里云Redis配置 - 请替换为实际的配置
+  host: r-xxxxxxxxxxxxxxx.redis.rds.aliyuncs.com  # 阿里云Redis内网地址
   port: 6379
-  password: ""
+  password: "YourRedisPassword123!"  # Redis密码
   db: 0
+  pool_size: 50
+  min_idle_conns: 10
 
 log:
-  level: info
+  level: info  # 生产环境日志级别
   format: json
   output_path: ./logs/app.log
   max_size: 100
@@ -38,30 +41,86 @@ log:
   compress: true
 
 jwt:
-  secret: ocean-marketing-secret-key-change-in-production
+  secret: "your-super-secret-jwt-key-please-change-in-production-environment"  # 请修改为强密钥
   expire_time: 86400  # 24小时
   issuer: ocean-marketing
 
 email:
-  host: smtp.gmail.com
-  port: 587
-  username: your-email@gmail.com
-  password: your-app-password
-  from: your-email@gmail.com
+  # 阿里云邮件推送或自定义SMTP配置
+  host: smtpdm.aliyun.com  # 阿里云邮件推送SMTP
+  port: 25
+  username: your-email@your-domain.com  # 发送邮箱
+  password: your-smtp-password  # SMTP密码
+  from: your-email@your-domain.com
 
 tracer:
   service_name: ocean-marketing
-  agent_host: localhost
-  agent_port: 6831
-  sample_rate: 1.0
+  # 如果使用阿里云链路追踪，配置对应的endpoint
+  agent_host: tracing-analysis-dc-hz.aliyuncs.com  # 阿里云链路追踪endpoint
+  agent_port: 8000
+  sample_rate: 0.1  # 生产环境降低采样率
 
 feishu:
-  webhook_url: "https://open.feishu.cn/open-apis/bot/v2/hook/your-webhook-url"
+  webhook_url: "https://open.feishu.cn/open-apis/bot/v2/hook/your-production-webhook-url"  # 生产环境飞书webhook
 
 mq:
   driver: rabbitmq
-  host: localhost
+  # 阿里云消息队列RabbitMQ版配置
+  host: xxxxxxxxxxxxxxx.mq-amqp.cn-hangzhou-a.aliyuncs.com  # 阿里云RabbitMQ地址
   port: 5672
-  username: guest
-  password: guest
-  vhost: / 
+  username: your-mq-username  # 消息队列用户名
+  password: your-mq-password  # 消息队列密码
+  vhost: your-vhost  # 虚拟主机
+
+# 阿里云特有配置
+aliyun:
+  # 地域配置
+  region: cn-hangzhou
+  
+  # 访问控制
+  access_key_id: "LTAI5t******"  # 阿里云AccessKey ID
+  access_key_secret: "********"  # 阿里云AccessKey Secret
+  
+  # SLS日志服务配置
+  sls:
+    endpoint: cn-hangzhou.log.aliyuncs.com
+    project: ocean-marketing-logs
+    logstore: app-logs
+  
+  # OSS对象存储配置
+  oss:
+    endpoint: oss-cn-hangzhou.aliyuncs.com
+    bucket: ocean-marketing-files
+  
+  # 监控配置
+  cms:
+    enabled: true
+    namespace: ocean-marketing
+
+# 安全配置
+security:
+  # 加密密钥，用于敏感数据加密
+  encrypt_key: "your-32-char-encrypt-key-here"
+  
+  # CORS配置
+  cors:
+    allow_origins: 
+      - "https://your-domain.com"
+      - "https://admin.your-domain.com"
+    allow_methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    allow_headers: ["Authorization", "Content-Type", "X-Requested-With"]
+    expose_headers: ["X-Total-Count"]
+    max_age: 86400
+
+# 性能配置
+performance:
+  # 限流配置
+  rate_limit:
+    enabled: true
+    rate: 1000  # 每分钟请求数
+    burst: 100  # 突发请求数
+  
+  # 缓存配置
+  cache:
+    default_ttl: 3600  # 默认缓存时间（秒）
+    max_memory: "512mb"  # 最大内存使用 
